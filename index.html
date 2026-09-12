@@ -91,6 +91,37 @@
         font-size: 14px;
       }
 
+      /* もくじ */
+      .toc {
+        margin: 36px 0 0;
+        padding: 20px 22px;
+        border-radius: 16px;
+        background: var(--surface);
+      }
+
+      .toc-title {
+        margin: 0 0 10px;
+        font-size: 20px;
+      }
+
+      .toc-list {
+        margin: 0;
+        padding-left: 1.4em;
+      }
+
+      .toc-list li {
+        margin: 4px 0;
+      }
+
+      .toc-list a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+
+      .toc-list a:hover {
+        text-decoration: underline;
+      }
+
       /* セクション */
       section {
         padding: 44px 0;
@@ -473,6 +504,19 @@
       </header>
 
       <main>
+        <nav class="toc" aria-label="もくじ">
+          <h2 class="toc-title">もくじ</h2>
+          <ol class="toc-list">
+            <li><a href="#about">アプリについて</a></li>
+            <li><a href="#features">主な機能</a></li>
+            <li><a href="#howto">使い方</a></li>
+            <li><a href="#faq">よくある質問</a></li>
+            <li><a href="#release">更新情報</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+            <li><a href="#privacy">プライバシーポリシー</a></li>
+          </ol>
+        </nav>
+
         <section id="about">
           <h2>アプリについて</h2>
           <p>
@@ -668,8 +712,8 @@
         <section id="release">
           <h2>更新情報</h2>
           <div class="release">
-            <p class="version"><strong>v1.0.2</strong></p>
-            <p>（ここに1.0.2の更新内容を記入してください）</p>
+            <p class="version"><strong>v1.0.2</strong><time datetime="2026-09-12">2026年9月12日</time></p>
+            <p>サポートページのURLを変更しました。</p>
           </div>
           <div class="release">
             <p class="version"><strong>v1.0.1</strong></p>
