@@ -1,367 +1,732 @@
 <!doctype html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>サポート | じゃんけん勝率トレーナー</title>
-<style>
-  :root {
-    color-scheme: light;
-  }
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    background: #ffffff;
-    color: #1c1c1e;
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Segoe UI", sans-serif;
-    line-height: 1.8;
-    -webkit-text-size-adjust: 100%;
-  }
-  .wrap {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 32px 20px 64px;
-  }
-  header.hero {
-    text-align: center;
-    padding: 24px 0 32px;
-  }
-  header.hero .app-name {
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin: 0 0 6px;
-  }
-  header.hero .tagline {
-    font-size: 0.95rem;
-    color: #6e6e73;
-    margin: 0;
-  }
-  header.hero .version-pill {
-    display: inline-block;
-    margin-top: 12px;
-    padding: 4px 12px;
-    border-radius: 999px;
-    background: #f2f2f7;
-    color: #6e6e73;
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-  h2 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin: 40px 0 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #e5e5ea;
-  }
-  h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin: 20px 0 6px;
-  }
-  p {
-    margin: 0 0 12px;
-    font-size: 0.98rem;
-  }
-  ol, ul {
-    margin: 0 0 12px;
-    padding-left: 1.3em;
-  }
-  li {
-    margin-bottom: 6px;
-    font-size: 0.98rem;
-  }
-  .qa-item {
-    margin-bottom: 18px;
-  }
-  .qa-item .q {
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .qa-item .q::before {
-    content: "Q. ";
-    color: #6e6e73;
-  }
-  .qa-item .a::before {
-    content: "A. ";
-    color: #6e6e73;
-  }
-  .badge-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 12px 0 0;
-    padding: 0;
-    list-style: none;
-  }
-  .badge-list li {
-    margin: 0;
-    background: #f2f2f7;
-    border-radius: 999px;
-    padding: 6px 14px;
-    font-size: 0.85rem;
-    color: #1c1c1e;
-  }
-  .mode-cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin: 12px 0 4px;
-  }
-  @media (min-width: 520px) {
-    .mode-cards {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  .mode-card {
-    background: #f9f9fb;
-    border: 1px solid #e5e5ea;
-    border-radius: 14px;
-    padding: 16px 18px;
-  }
-  .mode-card .mode-name {
-    font-weight: 700;
-    font-size: 1rem;
-    margin: 0 0 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .mode-card p {
-    margin: 0;
-    font-size: 0.92rem;
-    color: #3a3a3c;
-  }
-  .note-box {
-    background: #fff8ee;
-    border: 1px solid #f2ddb0;
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin: 12px 0;
-  }
-  .note-box p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #6b5426;
-  }
-  .contact-box {
-    background: #f2f2f7;
-    border-radius: 12px;
-    padding: 16px 18px;
-  }
-  .contact-box p {
-    margin-bottom: 6px;
-  }
-  .mail-button {
-    display: block;
-    width: fit-content;
-    margin: 10px auto 0;
-    padding: 8px 16px;
-    background: #0066cc;
-    color: #ffffff;
-    text-decoration: none;
-    text-align: center;
-    font-size: 0.88rem;
-    font-weight: 600;
-    border-radius: 8px;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .mail-button:hover,
-  .mail-button:focus {
-    background: #0052a3;
-    color: #ffffff;
-    text-decoration: none;
-  }
-  .changelog {
-    background: #f2f2f7;
-    border-radius: 12px;
-    padding: 16px 18px;
-  }
-  .changelog .version {
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .changelog ul {
-    margin: 0;
-  }
-  .changelog + .changelog {
-    margin-top: 12px;
-  }
-  .changelog .version .date {
-    margin-left: 12px;
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: #6e6e73;
-  }
-  footer {
-    margin-top: 48px;
-    padding-top: 16px;
-    border-top: 1px solid #e5e5ea;
-    font-size: 0.82rem;
-    color: #8e8e93;
-    text-align: center;
-  }
-  a {
-    color: #0066cc;
-  }
-</style>
-</head>
-<body>
-<div class="wrap">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta
+      name="description"
+      content="人の名前や特徴、好みを記録して探せるアプリ「常連さん Joren」のサポートページ。使い方、よくある質問、お問い合わせ、プライバシーについてご案内します。"
+    />
+    <title>常連さん Joren サポート</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #1d1d1f;
+        --ink-soft: #6e6e73;
+        --line: #e6e2ee;
+        --blue: #0071e3;
+        --blue-dark: #0058b8;
+        --surface: #f5f5f7;
+        --brand: #7c53d4;
+        --brand-pink: #d1479b;
+        --accent-bar: linear-gradient(180deg, #f584c3, #9a6fe8);
+      }
 
-  <header class="hero">
-    <p class="app-name">じゃんけん勝率トレーナー</p>
-    <p class="tagline">グー・チョキ・パーで連勝を伸ばそう。みんなで遊べるパーティーモードも。</p>
-    <span class="version-pill">最新バージョン 1.0.3</span>
-  </header>
+      * {
+        box-sizing: border-box;
+      }
 
-  <section>
-    <p>
-      「じゃんけん勝率トレーナー」は、じゃんけんの対戦結果を記録し、
-      自分の勝率や連勝の傾向を確認できる、シンプルな1画面アプリです。
-      ひとりでの練習に使える「通常モード」と、負けたらひとことメッセージが表示される
-      「パーティーモード」の2つの遊び方があります。会員登録や通信は行わず、端末の中だけで完結します。
-    </p>
-    <ul class="badge-list">
-      <li>外部送信なし</li>
-      <li>アカウント登録なし</li>
-      <li>課金なし</li>
-      <li>広告なし</li>
-    </ul>
-  </section>
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
 
-  <section>
-    <h2>2つのモード</h2>
-    <div class="mode-cards">
-      <div class="mode-card">
-        <p class="mode-name">📈 通常モード</p>
-        <p>勝率と連勝を記録しよう。総対戦数・勝率・現在の連勝数・最高連勝数をコツコツ記録していく、ひとり練習向けのモードです。</p>
-      </div>
-      <div class="mode-card">
-        <p class="mode-name">🎉 パーティーモード</p>
-        <p>負けたら罰ゲーム。対戦に負けると、画面にひとこと罰ゲーム風のメッセージが表示されます。友達や家族とわいわい対戦するときにどうぞ。</p>
-      </div>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans",
+          "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+        font-size: 17px;
+        line-height: 1.7;
+        letter-spacing: 0.01em;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 0 22px;
+      }
+
+      /* ヘッダー */
+      .hero {
+        position: relative;
+        margin: 0 -22px;
+        padding: 72px 22px 52px;
+        background: linear-gradient(140deg, #fde4f2 0%, #ece3fd 48%, #dbeafe 100%);
+        text-align: center;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        right: 22px;
+        bottom: 0;
+        left: 22px;
+        height: 1px;
+        background: var(--accent-bar);
+        opacity: 0.5;
+      }
+
+      .hero .app-name {
+        margin: 0;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: 0.005em;
+      }
+
+      .hero .tagline {
+        margin: 12px 0 0;
+        color: var(--ink-soft);
+        font-size: 19px;
+      }
+
+      .hero .meta {
+        margin: 20px 0 0;
+        color: var(--ink-soft);
+        font-size: 14px;
+      }
+
+      /* セクション */
+      section {
+        padding: 44px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      h2 {
+        position: relative;
+        margin: 0 0 20px;
+        padding-left: 16px;
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: 0.005em;
+      }
+
+      h2::before {
+        content: "";
+        position: absolute;
+        top: 0.24em;
+        bottom: 0.2em;
+        left: 0;
+        width: 6px;
+        border-radius: 3px;
+        background: var(--accent-bar);
+      }
+
+      h3 {
+        margin: 28px 0 6px;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+
+      h3:first-of-type {
+        margin-top: 0;
+      }
+
+      p {
+        margin: 0 0 16px;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+
+      .lead {
+        color: var(--ink-soft);
+      }
+
+      ul {
+        margin: 0 0 16px;
+        padding-left: 1.3em;
+      }
+
+      li {
+        margin-bottom: 8px;
+      }
+
+      li:last-child {
+        margin-bottom: 0;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+
+      /* 「こんなとき」の声 */
+      .voices {
+        margin: 0 0 16px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .voices li {
+        margin-bottom: 8px;
+        padding: 12px 18px;
+        color: #56515e;
+        border-left: 3px solid #e3d8f7;
+        border-radius: 0 12px 12px 0;
+        background: #faf7ff;
+      }
+
+      /* 機能カード */
+      .cards {
+        display: grid;
+        gap: 12px;
+      }
+
+      .card {
+        padding: 20px 22px;
+        border-radius: 16px;
+        background: var(--surface);
+      }
+
+      /* 4色を順に繰り返して、項目の切れ目を見分けやすくする */
+      .card:nth-child(4n + 1) {
+        background: #fdeaf5;
+      }
+
+      .card:nth-child(4n + 2) {
+        background: #f1ebfd;
+      }
+
+      .card:nth-child(4n + 3) {
+        background: #e6f0fd;
+      }
+
+      .card:nth-child(4n + 4) {
+        background: #e6f6f1;
+      }
+
+      .card h3 {
+        margin: 0 0 4px;
+        color: var(--brand);
+      }
+
+      .card:nth-child(4n + 1) h3 {
+        color: var(--brand-pink);
+      }
+
+      .card:nth-child(4n + 3) h3 {
+        color: #2f6bb5;
+      }
+
+      .card:nth-child(4n + 4) h3 {
+        color: #2b7a63;
+      }
+
+      .card p {
+        color: #56515e;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 16px;
+      }
+
+      /* 使い方の手順 */
+      .steps {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: step;
+      }
+
+      .steps > li {
+        position: relative;
+        margin-bottom: 22px;
+        padding-left: 44px;
+        counter-increment: step;
+      }
+
+      .steps > li:last-child {
+        margin-bottom: 0;
+      }
+
+      .steps > li::before {
+        content: counter(step);
+        position: absolute;
+        top: 2px;
+        left: 0;
+        display: grid;
+        width: 30px;
+        height: 30px;
+        place-items: center;
+        color: #ffffff;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #f584c3, #9a6fe8);
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1;
+      }
+
+      .steps h3 {
+        margin: 0 0 2px;
+        color: var(--brand);
+      }
+
+      .steps p {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 16px;
+      }
+
+      /* よくある質問 */
+      .faq h3 {
+        margin: 0 0 6px;
+        padding-left: 26px;
+        color: var(--brand);
+      }
+
+      .faq h3::before {
+        content: "Q";
+        margin-left: -26px;
+        padding-right: 10px;
+        color: var(--brand-pink);
+        font-weight: 700;
+      }
+
+      .faq p {
+        margin: 0;
+        padding: 14px 18px;
+        color: #56515e;
+        border-left: 3px solid #e3d8f7;
+        border-radius: 0 12px 12px 0;
+        background: #faf7ff;
+      }
+
+      .faq-item {
+        margin-bottom: 22px;
+      }
+
+      .faq-item:last-child {
+        margin-bottom: 0;
+      }
+
+      /* 更新情報 */
+      .release {
+        padding: 18px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .release:first-of-type {
+        padding-top: 0;
+      }
+
+      .release:last-of-type {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .release .version {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        margin: 0 0 6px;
+      }
+
+      .release .version strong {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .release .version time {
+        color: var(--ink-soft);
+        font-size: 14px;
+      }
+
+      .release p {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 16px;
+      }
+
+      /* 更新情報 */
+      .release .version strong {
+        color: var(--brand);
+      }
+
+      /* お問い合わせ */
+      .contact {
+        text-align: center;
+      }
+
+      .contact h2 {
+        text-align: left;
+      }
+
+      .contact-panel {
+        margin-top: 20px;
+        padding: 28px 24px 24px;
+        border-radius: 18px;
+        background: linear-gradient(140deg, #fdeaf5 0%, #efe8fd 55%, #e3eefd 100%);
+      }
+
+      .contact-panel p {
+        text-align: left;
+      }
+
+      .mail-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        margin: 8px 0 14px;
+        padding: 0 34px;
+        color: #ffffff;
+        border-radius: 980px;
+        background: var(--blue);
+        font-size: 17px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 150ms ease;
+      }
+
+      .mail-button:hover {
+        background: var(--blue-dark);
+      }
+
+      .mail-button:active {
+        background: var(--blue-dark);
+      }
+
+      .mail-note {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .mail-note a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+
+      .mail-note a:hover {
+        text-decoration: underline;
+      }
+
+      /* プライバシー */
+      #privacy h3 {
+        color: var(--brand);
+      }
+
+      /* フッター */
+      footer {
+        margin: 0 -22px;
+        padding: 32px 22px 56px;
+        border-top: 1px solid var(--line);
+        background: linear-gradient(180deg, #ffffff, #faf7fd);
+        color: var(--ink-soft);
+        font-size: 13px;
+        text-align: center;
+      }
+
+      footer p {
+        margin: 0 0 4px;
+      }
+
+      @media (max-width: 520px) {
+        body {
+          font-size: 16px;
+        }
+
+        .hero {
+          padding: 52px 0 36px;
+        }
+
+        .hero .app-name {
+          font-size: 32px;
+        }
+
+        .hero .tagline {
+          font-size: 17px;
+        }
+
+        section {
+          padding: 36px 0;
+        }
+
+        h2 {
+          font-size: 23px;
+        }
+
+        .mail-button {
+          width: 100%;
+          padding: 0 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero">
+        <h1 class="app-name">常連さん Joren</h1>
+        <p class="tagline">顔と特徴で、すぐ思い出す</p>
+        <p class="meta">人のことを忘れないための記録アプリ ／ iPhone対応</p>
+      </header>
+
+      <main>
+        <section id="about">
+          <h2>アプリについて</h2>
+          <p>
+            「常連さん」は、人の名前や特徴、好みなどを記録して、あとから簡単に探して確認できるアプリです。
+          </p>
+          <ul class="voices">
+            <li>「顔はわかるけど名前が思い出せない」</li>
+            <li>「この人の誕生日いつだっけ？」</li>
+            <li>「何が好きだったかな？」</li>
+          </ul>
+          <p>そんな時にすぐ確認できます。</p>
+          <p>
+            名前や顔写真だけでなく、誕生日、好きなもの・苦手なもの、よく飲むお酒、趣味、会った日など、覚えておきたいことを自由にメモできます。
+          </p>
+          <p>
+            キーワードで検索できるので、「ヨガ」「ビール」「旅行」など、覚えている情報から相手を探すこともできます。
+          </p>
+          <p>
+            バーやスナックなどのお客様の記録はもちろん、仕事で会う人、知り合い、友達との記録にも使えます。
+          </p>
+          <p>人のことを忘れないための、シンプルな記録アプリです。</p>
+          <p>
+            登録した内容はすべて<strong>お使いの端末の中だけ</strong>に保存されます。会員登録もログインも必要ありません。インターネットに接続していなくてもご利用いただけます。
+          </p>
+        </section>
+
+        <section id="features">
+          <h2>主な機能</h2>
+          <div class="cards">
+            <div class="card">
+              <h3>人の登録</h3>
+              <p>
+                顔写真、名前、誕生日、好きな飲み物（よく飲むお酒）、好きな食べ物、嫌いな食べ物、趣味、メモを登録できます。すべて任意の項目なので、覚えておきたいことだけ書けば大丈夫です。
+              </p>
+            </div>
+            <div class="card">
+              <h3>顔写真の位置調整</h3>
+              <p>
+                写真を選んだあと、ドラッグと拡大スライダーで顔の位置を合わせられます。調整した見え方が、そのまま一覧とプロフィールに表示されます。
+              </p>
+            </div>
+            <div class="card">
+              <h3>まとめて検索</h3>
+              <p>
+                名前だけでなく、誕生日・好きな飲み物・食べ物・趣味・メモの内容からも探せます。「ヨガ」「ビール」「旅行」のように、覚えている言葉から探せます。スペースか「、」で区切ると、そのすべてを含む方に絞り込めます。
+              </p>
+            </div>
+            <div class="card">
+              <h3>お気に入り</h3>
+              <p>
+                一覧のカード右上の☆をタップするだけで登録・解除ができます。画面下の「お気に入り」から、登録した方だけを表示できます。
+              </p>
+            </div>
+            <div class="card">
+              <h3>あった日の記録</h3>
+              <p>
+                プロフィールの「今日あった」をタップすると、その日に会ったことを記録できます。もう一度タップすれば取り消せます。
+              </p>
+            </div>
+            <div class="card">
+              <h3>カレンダー</h3>
+              <p>
+                月ごとのカレンダーで、記録のある日に印が付きます。日付をタップすると、その日に会った方の一覧が表示されます。
+              </p>
+            </div>
+            <div class="card">
+              <h3>並び替え</h3>
+              <p>更新が新しい順、名前順、登録が新しい順の3通りで並び替えられます。</p>
+            </div>
+            <div class="card">
+              <h3>2つの表示モード</h3>
+              <p>
+                かわいらしい配色の「パステルモード」と、文字と写真を大きくした見やすい「シンプルモード」を、いつでも切り替えられます。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="howto">
+          <h2>使い方</h2>
+          <ol class="steps">
+            <li>
+              <h3>表示モードを選ぶ</h3>
+              <p>
+                初回起動時に「パステルモード」か「シンプルモード」を選びます。あとから画面右上のボタンでいつでも変更できます。
+              </p>
+            </li>
+            <li>
+              <h3>人を登録する</h3>
+              <p>
+                画面下の「登録」をタップします。写真の枠を押して顔写真を選び、名前やメモなど覚えておきたいことを入力して「登録」を押します。
+              </p>
+            </li>
+            <li>
+              <h3>写真の位置を合わせる</h3>
+              <p>
+                写真を選ぶと位置調整の画面が開きます。写真をドラッグして顔を枠の中に入れ、スライダーで大きさを調整して「決定」を押します。
+              </p>
+            </li>
+            <li>
+              <h3>相手を探す</h3>
+              <p>
+                画面上部の検索欄に、名前や特徴を入力します。「ヨガ」「ビール」のように覚えている言葉だけでも探せます。「田中 ビール」のようにスペースで区切ると、その両方に当てはまる方だけが表示されます。
+              </p>
+            </li>
+            <li>
+              <h3>プロフィールを見る・記録する</h3>
+              <p>
+                一覧のカードをタップすると、登録した内容をまとめて確認できます。「今日あった」を押すと会った日が記録され、カレンダーにも反映されます。
+              </p>
+            </li>
+            <li>
+              <h3>内容を書き換える</h3>
+              <p>
+                プロフィール画面の「編集」から、いつでも内容を修正できます。削除もこの編集画面から行えます。
+              </p>
+            </li>
+          </ol>
+        </section>
+
+        <section id="faq" class="faq">
+          <h2>よくある質問</h2>
+
+          <div class="faq-item">
+            <h3>データはどこに保存されますか？</h3>
+            <p>
+              お使いの端末の中だけに保存されます。外部のサーバーへ送信する処理は一切ありません。
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>会員登録やログインは必要ですか？</h3>
+            <p>必要ありません。アプリを開いてすぐにお使いいただけます。</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>機種変更したらデータは引き継げますか？</h3>
+            <p>
+              申し訳ありませんが、現在バックアップや書き出しの機能はありません。データは端末内にのみ保存されるため、別の端末へ引き継ぐことはできません。また、アプリを削除すると登録内容もあわせて削除されますのでご注意ください。
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>登録できる人数に上限はありますか？</h3>
+            <p>
+              アプリ側での上限は設けていません。端末の空き容量の範囲でご登録いただけます。
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>写真が登録できません</h3>
+            <p>
+              写真は1枚あたり50MBまでです。また、端末やOSのバージョンによってはHEIC形式の写真を読み込めない場合があります。その場合はJPEGなど別の形式に変換してからお試しください。
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>写真の画質はそのまま保存されますか？</h3>
+            <p>
+              端末の容量を節約するため、長辺1800px以内のJPEGに変換して保存しています。一覧やプロフィールでの表示には十分な画質です。
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>誕生日で検索できますか？</h3>
+            <p>
+              できます。「7月2日」のような表記のほか、「72」「0702」といった数字での検索にも対応しています。
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>間違えて「今日あった」を押してしまいました</h3>
+            <p>
+              もう一度「今日あった」をタップすると、その日の記録を取り消せます。取り消せるのは当日の記録のみです。
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>登録した人を削除したい</h3>
+            <p>
+              プロフィールを開いて「編集」を押し、画面下部の「削除」から削除できます。写真やメモもあわせて削除され、元に戻すことはできません。
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>表示モードは切り替えられますか？</h3>
+            <p>
+              画面右上のボタンを押すたびに、パステルモードとシンプルモードが切り替わります。登録した内容には影響しません。
+            </p>
+          </div>
+        </section>
+
+        <section id="release">
+          <h2>更新情報</h2>
+          <div class="release">
+            <p class="version"><strong>v1.0.2</strong></p>
+            <p>（ここに1.0.2の更新内容を記入してください）</p>
+          </div>
+          <div class="release">
+            <p class="version"><strong>v1.0.1</strong></p>
+            <p>アプリ内にバージョン表記を追加しました。</p>
+          </div>
+        </section>
+
+        <section id="contact" class="contact">
+          <h2>お問い合わせ</h2>
+          <div class="contact-panel">
+            <p>
+              ご不明な点、不具合のご報告、ご要望などがございましたら、下のボタンからお気軽にご連絡ください。件名は自動で入力されます。
+            </p>
+            <a class="mail-button" href="mailto:createlabone@gmail.com?subject=%E3%80%90%E5%B8%B8%E9%80%A3%E3%81%95%E3%82%93%E3%80%91%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">メールで問い合わせる</a>
+            <p class="mail-note">お返事までに数日いただく場合があります。</p>
+          </div>
+        </section>
+
+        <section id="privacy">
+          <h2>プライバシーポリシー</h2>
+
+          <h3>収集する情報</h3>
+          <p>
+            当アプリは、利用者の個人情報を収集しません。氏名やメールアドレスの登録、アカウントの作成は不要です。
+          </p>
+
+          <h3>登録内容の取り扱い</h3>
+          <p>
+            アプリに登録された顔写真、名前、誕生日、好みやメモなどの内容は、すべて利用者ご自身の端末内にのみ保存されます。開発者を含む第三者がこれらの内容を閲覧・取得することはできません。
+          </p>
+
+          <h3>外部への送信</h3>
+          <p>
+            当アプリには、登録内容を外部のサーバーへ送信する機能はありません。広告の配信、アクセス解析、利用状況の収集も一切行っていません。
+          </p>
+
+          <h3>写真へのアクセス</h3>
+          <p>
+            顔写真を登録する目的でのみ、端末の写真ライブラリへアクセスします。利用者が選択した写真だけをアプリ内に取り込み、それ以外の写真を読み取ることはありません。
+          </p>
+
+          <h3>データの削除</h3>
+          <p>
+            登録内容は、アプリ内で個別に削除できるほか、アプリ本体を削除することですべて消去されます。削除したデータを復元することはできません。
+          </p>
+
+          <h3>お問い合わせいただいた場合</h3>
+          <p>
+            メールでお問い合わせいただいた際は、返信のために必要な範囲でメールアドレスと内容を利用します。返信以外の目的には使用せず、第三者へ提供することはありません。
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <p>常連さん Joren サポート</p>
+        <p>© CreateLab</p>
+      </footer>
     </div>
-    <div class="note-box">
-      <p>
-        パーティーモードの「罰ゲーム」は画面に表示されるメッセージのみで、アプリが飲酒などの行為を強制・記録することはありません。
-        メッセージの内容にお酒に関する言葉が含まれる場合がありますが、実際に飲むかどうかは参加者同士の判断にお任せしています。
-        未成年の方はお酒に関する内容を実際の行為には結びつけず、ルールはご参加の皆さまで安全に調整してお楽しみください。
-      </p>
-    </div>
-  </section>
-
-  <section>
-    <h2>使い方</h2>
-    <ol>
-      <li>「勝負を始める」をタップすると、あなたと相手の手がルーレット表示になります。</li>
-      <li>グー・チョキ・パーのいずれかをタップして手を決めます。</li>
-      <li>相手の手と勝敗結果（勝ち・負け・あいこ）がその場で表示されます。パーティーモードで負けた場合は、罰ゲーム風のメッセージが合わせて表示されます。</li>
-      <li>総対戦数・勝ち数・負け数・あいこ数・勝率・現在の連勝数・最高連勝数が自動で集計されます。</li>
-      <li>画面右上のアイコンをタップすると、通常モードとパーティーモードをいつでも切り替えられます。それぞれの記録は別々に保存されます。</li>
-      <li>記録をやり直したいときは「戦績をリセット」をタップし、確認ダイアログで「リセットする」を選ぶと、現在表示中のモードの記録がすべて消去されます（誤タップ防止のため、確認せずに消えることはありません）。</li>
-    </ol>
-  </section>
-
-  <section>
-    <h2>よくある質問</h2>
-
-    <div class="qa-item">
-      <p class="q">通常モードとパーティーモードで記録は共有されますか？</p>
-      <p class="a">共有されません。モードごとに勝率や連勝数が別々に記録され、片方をリセットしてももう片方の記録には影響しません。</p>
-    </div>
-
-    <div class="qa-item">
-      <p class="q">記録はどこに保存されますか？</p>
-      <p class="a">記録はお使いの端末内にのみ保存されます。インターネットには一切送信されません。</p>
-    </div>
-
-    <div class="qa-item">
-      <p class="q">アプリを削除すると記録はどうなりますか？</p>
-      <p class="a">アプリをアンインストールすると、端末内に保存されていた記録（通常モード・パーティーモードとも）もあわせて削除されます。</p>
-    </div>
-
-    <div class="qa-item">
-      <p class="q">機種変更したら記録は引き継げますか？</p>
-      <p class="a">記録は端末内にのみ保存されており、外部やクラウドへのバックアップは行っていないため、機種変更時に自動で引き継ぐことはできません。</p>
-    </div>
-
-    <div class="qa-item">
-      <p class="q">パーティーモードは実際にお酒を飲むことを前提にしていますか？</p>
-      <p class="a">いいえ。アプリが飲酒を要求したり記録したりすることはありません。表示されるのはあくまでテキストメッセージで、遊び方は参加者の皆さまの判断にお任せしています。</p>
-    </div>
-
-    <div class="qa-item">
-      <p class="q">広告や課金はありますか？</p>
-      <p class="a">広告表示、アプリ内課金、サブスクリプションはいずれもありません。無料で全機能をお使いいただけます。</p>
-    </div>
-
-    <div class="qa-item">
-      <p class="q">アカウント登録は必要ですか？</p>
-      <p class="a">不要です。ダウンロード後すぐにお使いいただけます。</p>
-    </div>
-
-    <div class="qa-item">
-      <p class="q">オフラインでも使えますか？</p>
-      <p class="a">はい。本アプリは通信を行わないため、電波の届かない場所でもすべての機能をご利用いただけます。</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>更新情報</h2>
-    <div class="changelog">
-      <p class="version">バージョン 1.0.3<time class="date" datetime="2026-09-12">2026年9月12日</time></p>
-      <ul>
-        <li>表示の不具合を修正し、動作を安定させました。</li>
-      </ul>
-    </div>
-
-    <div class="changelog">
-      <p class="version">バージョン 1.0.1</p>
-      <ul>
-        <li>「パーティーモード」を追加。負けると罰ゲーム風のメッセージが表示されます。</li>
-        <li>画面レイアウトを全体的に見直し、暗めのテーマでより見やすく表示されるようにしました。</li>
-        <li>通常モードとパーティーモードで戦績を別々に記録するようにしました。</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <h2>お問い合わせ</h2>
-    <div class="contact-box">
-      <p>不具合のご報告やご要望などは、下のボタンからお気軽にお送りください。</p>
-      <a class="mail-button" href="mailto:createlabone@gmail.com?subject=%E3%81%98%E3%82%83%E3%82%93%E3%81%91%E3%82%93%E5%8B%9D%E7%8E%87%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC%20%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">メールで問い合わせる</a>
-    </div>
-  </section>
-
-  <section>
-    <h2>プライバシーについて</h2>
-    <p>
-      本アプリは、氏名・メールアドレス・位置情報などの個人情報を一切収集しません。
-      アカウント登録やログイン機能もありません。
-    </p>
-    <p>
-      対戦成績（総対戦数・勝敗数・あいこ数・勝率・連勝記録）は、通常モード・パーティーモードごとにお使いの端末内にのみ保存され、
-      外部のサーバーやサービスへ送信されることはありません。
-    </p>
-    <p>
-      広告表示、第三者トラッキング、解析SDKの組み込みは行っていません。
-    </p>
-    <p>
-      アプリ内の「戦績をリセット」機能、またはアプリ自体のアンインストールにより、
-      保存されたすべてのデータは端末から削除されます。
-    </p>
-    <p>
-      プライバシーポリシーの詳細については、開発者までお問い合わせください。
-    </p>
-  </section>
-
-  <footer>
-    <p>じゃんけん勝率トレーナー サポートページ</p>
-  </footer>
-
-</div>
-</body>
+  </body>
 </html>
